@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import Form from './Form';
-import FormInput from './FormInput';
+import Form from '../library/Form';
+import FormInput from '../library/FormInput';
+import './PageWithForm.css';
+
 
 export const PageWithForm = () => {
   const [ userInfo, setUserInfo ] = useState({
@@ -14,7 +16,7 @@ export const PageWithForm = () => {
   });
 
   return (
-    <div>
+    <div className="page">
         <Form initialValues={userInfo} onSubmit={setUserInfo}>
           <FormInput type="email" required name="email" placeholder="your@email.com" />
           <FormInput type="number" name="age" />
