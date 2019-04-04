@@ -1,60 +1,49 @@
 import React, {useContext} from 'react';
 import { FormCtx } from "./Form"
 
-function FormInput ({ type, name, value, ...rest }) {
+const FormInput = ({ type, name }) =>{
 
   const [userInfo, setUserInfo] = useContext(FormCtx);
+  let inputName = name;
+
+  if (name){
+    inputName =name.split('.').reduce((o, i)=>o[i], userInfo);
+    //inputName= name.replace('.', "][" )
+  }
+
+
+  // handleSetState(cat, key, val) => {
+  //   const category = {...userInfo[cat]};
+  //   if (typeof key === 'string') {
+  //     category[key] = val;
+  //   } else {
+  //     key.map((item, index) => {
+  //       category[item] = val[index];
+  //     });
+  //   }
+  //  // setUserInfo({[cat]: category});
+  // }
+
 
   return(
     <div className="form-group">
       <input
         name={name}
         type={type}
-        value={value}
+        value={inputName}
         onChange={event => {
           event.preventDefault();
-          setUserInfo({ ...userInfo, [name]: event.target.value });
+          console.log([userInfo])
+          setUserInfo({ ...userInfo,  [name] : event.target.value });
+          setUserInfo({...userInfo, [name] : event.target.value })
+          console.log(userInfo)
+
+
         }}
-        {...rest}
       />
     </div>
 
   )
-}
+};
 
 export default FormInput;
-
-// const Input = ({name, value}) => (
-//   <FormConsumer>
-//     {({values, setValue}) => {
-//       return (
-//         <input name={name}
-//                value={values[name] || ""}
-//                onChange={(event) =>  {
-//                  event.preventDefault();
-//                  setValue(name, event.target.value);
-//                }}/>
-//       );
-//     }}
-//   </FormConsumer>
-// );
-//
-//
-// export default Input;
-
-// const Input = (props) => {
-//
-//   return (
-//     <div className="form-group">
-//     <label htmlFor={props.name} className="form-label">{props.title}</label>
-//       <input
-//         id={props.name}
-//         name={props.name}
-//         type={props.type}
-//         value={props.value}
-//         onChange={props.handleChange}
-//         placeholder={props.placeholder}
-//       />
-//     </div>
-//   )
-// }

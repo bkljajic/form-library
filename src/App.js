@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import FormInput from './components/FormInput'
-import Form from './components/Form'
 import PageWithForm from './components/PageWithForm'
 import './App.css';
 
