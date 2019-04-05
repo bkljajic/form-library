@@ -7,11 +7,10 @@ const FormInput = ({ type, name }) => {
   const [userInfo, setUserInfo] = useContext(FormCtx);
   const displayValue = _.get(userInfo, name);
 
-  function onChangeUpdate(initalState, key, value){
+  const handleChange = (initalState, key, value) => {
     let stateClone = _.cloneDeep(initalState);
     _.set(stateClone,key, value);
     setUserInfo({...userInfo, ...stateClone});
-
   }
 
   return(
@@ -22,7 +21,7 @@ const FormInput = ({ type, name }) => {
         value={displayValue}
         onChange={e => {
           e.preventDefault();
-          onChangeUpdate(userInfo, name, e.target.value)
+          handleChange(userInfo, name, e.target.value);
         }}
       />
     </div>
